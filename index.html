@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom New Tab</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url('jung.jpg') no-repeat;
+            background-size: cover;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+        #search-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            transition: box-shadow 0.5s;
+        }
+
+        /* Flying Birds Animation */
+        .bird {
+            position: absolute;
+            width: 200px; /* Slightly increased size of the bird image */
+            height: 200px; /* Slightly increased size of the bird image */
+            transform-origin: 0% 0%;
+            animation-timing-function: linear;
+        }
+
+        .bird1 {
+            background: url('b1.gif') no-repeat center center;
+            background-size: cover;
+            animation: flyAnimation1 8s linear infinite;
+        }
+
+        .bird2 {
+            background: url('b2.gif') no-repeat center center;
+            background-size: cover;
+            animation: flyAnimation2 8s linear infinite;
+        }
+
+        .bird3 {
+            background: url('b3.gif') no-repeat center center;
+            background-size: cover;
+            animation: flyAnimation3 8s linear infinite;
+        }
+
+        @keyframes flyAnimation1 {
+            0% {
+                transform: translate(100vw, 0);
+            }
+            100% {
+                transform: translate(0, 100vh);
+            }
+        }
+
+        @keyframes flyAnimation2 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(100vw, 100vh);
+            }
+        }
+
+        @keyframes flyAnimation3 {
+            0% {
+                transform: translate(0, 100vh);
+            }
+            100% {
+                transform: translate(100vw, 0);
+            }
+        }
+
+        @keyframes changeColor {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            }
+            20% {
+                box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+            }
+            40% {
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+            }
+            60% {
+                box-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+            }
+            80% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Search bar -->
+    <input type="text" id="search-bar" placeholder="Search Google" onkeypress="searchGoogle(event)">
+
+    <!-- Flying Birds -->
+    <div class="bird bird1"></div>
+    <div class="bird bird2"></div>
+    <div class="bird bird3"></div>
+
+    <script>
+        function moveBirds() {
+            const birds = document.querySelectorAll('.bird');
+
+            birds.forEach((bird, index) => {
+                const delay = index * 2; // Adjust the delay between birds
+                bird.style.animation = `flyAnimation${index + 1} 8s linear ${delay}s infinite`;
+            });
+        }
+
+function searchGoogle(event) {
+    if (event.key === 'Enter') {
+        const query = document.getElementById('search-bar').value;
+        window.location.href = `https://www.google.com/search?q=${query}`;
+    }
+}
+
+document.getElementById('search-bar').addEventListener('keypress', searchGoogle);
+
+function changeBoxShadowColor() {
+    const boxShadowElement = document.getElementById('search-bar');
+    boxShadowElement.style.animation = 'changeColor 0.7s infinite';
+}
+
+setInterval(changeBoxShadowColor, 700);
+
+function moveBirds() {
+    const birds = document.querySelectorAll('.bird');
+    birds.forEach((bird, index) => {
+        const delay = index * 2;
+        bird.style.animation = `flyAnimation${index + 1} 8s linear ${delay}s infinite`;
+    });
+}
+
+setInterval(moveBirds, 8000);
+
+    </script>
+</body>
+</html>
